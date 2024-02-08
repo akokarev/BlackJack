@@ -5,11 +5,11 @@ class User
   def initialize(name, cash)
     @name = name
     @cash = cash
-    @cards = []  #TODO возможно не нужно
+    @cards = []
   end
 
-  def take_card(deck)
-    cards << deck.pop
+  def take_card(card)
+    cards << card
   end
 
   def take_money(from, count = nil)
@@ -19,7 +19,11 @@ class User
     @cash += count
   end
 
+  def points
+    21
+  end
+
   def to_s
-    "#{name} ($#{cash}) #{cards.map ' '}"
+    "#{name} ($#{cash})}"
   end
 end

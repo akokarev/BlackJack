@@ -18,10 +18,11 @@ end
 bank.cards.shuffle!
 
 
-
 2.times do
-	player.take_card
-	dealer.take_card	
+	player.take_card(bank.cards.pop)
+	dealer.take_card(bank.cards.pop)
 end
 
-
+puts "#{player} #{player.cards.join(' ')} =#{player.points}"
+puts "#{dealer} * *"
+puts "#{bank}"
