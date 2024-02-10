@@ -20,10 +20,14 @@ class User
   end
 
   def points
-    21
+    values = cards.map { |card| card.value.is_a?(String) ? (card.value == 'T' ? 1 : 10) : card.value}
+    if (t_pos = values.index(1)) && (values.sum <= 11)
+      values[t_pos] = 11
+    end
+    values.sum
   end
 
   def to_s
-    "#{name} ($#{cash})}"
+    "#{name} ($#{cash})"
   end
 end

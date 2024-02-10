@@ -8,11 +8,15 @@ bank = User.new('Bank', 0)
 
 
 player.cards.clear
+bank.take_money(player, 20)
+
 dealer.cards.clear
+bank.take_money(dealer, 20)
+
 bank.cards.clear
 Card::SUITS.each do |suit|
 	Card::VALUES.each do |value|
-		bank.take_card(Card.new(suit, value))
+		bank.take_card(Card.new(value, suit))
 	end
 end
 bank.cards.shuffle!
@@ -23,6 +27,6 @@ bank.cards.shuffle!
 	dealer.take_card(bank.cards.pop)
 end
 
-puts "#{player} #{player.cards.join(' ')} =#{player.points}"
-puts "#{dealer} * *"
 puts "#{bank}"
+puts "#{dealer} * *"
+puts "#{player} #{player.cards.join(' ')} =#{player.points}"
