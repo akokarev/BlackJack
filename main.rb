@@ -21,7 +21,7 @@ end
 players.each do |player|
   player.define_singleton_method(:lets_play) do
     self.cards.clear
-    bank.take_money(self, 20)
+    bank.take_money(self, 10)
   end
 end
 
