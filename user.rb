@@ -27,7 +27,4 @@ class User
     values.sum
   end
 
-  def to_s
-    "#{name} ($#{cash})"
-  end
 end
