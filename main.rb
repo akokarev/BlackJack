@@ -10,7 +10,7 @@ print 'Player name: '
 player1 = Player.new(gets.chomp, 100)
 
 
-while (player1.cash > 0) && (dealer.cash > 0)
+loop do
 
   bank.lets_play
   dealer.lets_play(bank)
@@ -74,10 +74,12 @@ while (player1.cash > 0) && (dealer.cash > 0)
     player1.take_money(bank)
   end
 
+  break if (player1.cash == 0) || (dealer.cash == 0)
+  
   puts
   puts "#{player1.name}, на Вашем счету $#{player1.cash}"
 
-  while true
+  loop do
   	print 'Сыграем ещё? (Y/n) > '
   	choice = gets.chomp.upcase
   	break if ['Y','N',''].include?(choice)
