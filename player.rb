@@ -7,8 +7,12 @@ class Player < User
     2.times { take_card(bank.cards.pop) }
   end
 
+  def show_cards
+    "#{name} ($#{cash}) #{cards.join(' ')} =#{points}"
+  end
+
   def to_s
-  	"#{name} ($#{cash}) #{cards.join(' ')} =#{points}"
+  	show_cards
   end
   
 end
