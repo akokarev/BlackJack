@@ -87,6 +87,7 @@ loop do
   break if choice == 'N'
 end
 
+puts
 puts "По итогам игры на Вашем счету $#{player1.cash}"
 puts "Вы банкрот!" if player1.cash == 0
 puts "Вам удалось подзаработать!" if player1.cash > dealer.cash
