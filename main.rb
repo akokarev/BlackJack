@@ -15,11 +15,12 @@ loop do
   bank.lets_play
   dealer.lets_play(bank)
   player1.lets_play(bank)
-
   puts
   puts "Ставки сделаны, игра начинается!"
+
   while true
-    puts bank
+    puts "\e[H\e[2J"
+    puts
     puts dealer
     puts player1
     puts '1 - Пропустить ход'
@@ -33,7 +34,7 @@ loop do
       break if dealer.points > 21
     when 2
       if player1.cards.count == 2
-        player1.take_card(bank.cards.pop)
+        player1.turn(bank)
         break if player1.points > 21
         dealer.turn(bank)
         break if dealer.points > 21
@@ -44,11 +45,13 @@ loop do
       break    
     else
       puts 'Введите цифру соответвстующую вашему выбору'
+      gets
     end
 
     break if player1.cards.count == 3
   end
-
+  
+  puts "\e[H\e[2J"
   puts "Игра окончена, подсчёт очков:"
   puts dealer.show_cards
   puts player1.show_cards

@@ -8,11 +8,15 @@ class Player < User
   end
 
   def show_cards
-    "#{name} ($#{cash}) #{cards.join(' ')} =#{points}"
+    "#{name} #{cards.join(' ')} =#{points}"
   end
 
   def to_s
-  	show_cards
+    show_cards
   end
   
+  def turn(bank)
+    self.take_card(bank.cards.pop)
+  end
+
 end

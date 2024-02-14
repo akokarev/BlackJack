@@ -5,7 +5,7 @@ class Dealer < Player
 	end
 
 	def to_s
-		"#{name} ($#{cash}) #{cards.map{"\033[47;34m * \033[0m"}.join(' ')}"
+		"#{name} #{cards.map{"\033[47;34m * \033[0m"}.join(' ')}"
 	end
 
 	def turn(bank)
