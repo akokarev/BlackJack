@@ -27,4 +27,16 @@ class User
     values.sum
   end
 
+  def show_cards(open=false)
+    if open
+      "#{self.cards.join(' ')}"
+    else
+      "#{self.cards.map{"\033[47;34m * \033[0m"}.join(' ')}"
+    end
+  end
+
+  def to_s
+    name.to_s
+  end
+
 end

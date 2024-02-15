@@ -21,8 +21,8 @@ loop do
   while true
     puts "\e[H\e[2J"
     puts
-    puts dealer
-    puts player1
+    puts "#{dealer} #{dealer.show_cards(false)}"
+    puts "#{player1} #{player1.show_cards(true)} =#{player1.points}"
     puts '1 - Пропустить ход'
     puts '2 - Добавить карту' if player1.cards.count==2
     puts '3 - Открыть карты'
@@ -53,34 +53,34 @@ loop do
   
   puts "\e[H\e[2J"
   puts "Игра окончена, подсчёт очков:"
-  puts dealer.show_cards
-  puts player1.show_cards
+  puts "#{dealer} #{dealer.show_cards(true)} =#{dealer.points}"
+  puts "#{player1} #{player1.show_cards(true)} =#{player1.points}"
   if (dealer.points > 21) && (player1.points > 21)
     puts "Перебрали все/Ничья"
     dealer.take_money(bank, bank.cash / 2)
     player1.take_money(bank)
   elsif dealer.points > 21
-    puts "#{dealer.name} перебрал"
+    puts "#{dealer} перебрал"
     player1.take_money(bank)
   elsif player1.points > 21
-    puts "#{player1.name} перебрал, победа #{dealer.name}"
+    puts "#{player1} перебрал, победа #{dealer.name}"
     dealer.take_money(bank)
   elsif dealer.points == player1.points
     puts "Ничья по очкам"
     dealer.take_money(bank, bank.cash / 2)
     player1.take_money(bank)
   elsif dealer.points > player1.points
-    puts "#{dealer.name} выиграл по очкам"
+    puts "#{dealer} выиграл по очкам"
     dealer.take_money(bank)
   else
-    puts "#{player1.name} выиграл по очкам"
+    puts "#{player1} выиграл по очкам"
     player1.take_money(bank)
   end
 
   break if (player1.cash == 0) || (dealer.cash == 0)
   
   puts
-  puts "#{player1.name}, на Вашем счету $#{player1.cash}"
+  puts "#{player1}, на Вашем счету $#{player1.cash}"
 
   loop do
   	print 'Сыграем ещё? (Y/n) > '
