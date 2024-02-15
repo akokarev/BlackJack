@@ -1,6 +1,6 @@
-require_relative 'user.rb'
+require_relative 'player.rb'
 require_relative 'card.rb'
-class Bank < User
+class Bank < Player
   def initialize
   	super('Bank', 0)
   end
