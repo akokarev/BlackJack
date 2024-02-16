@@ -1,11 +1,12 @@
-require_relative 'player.rb'
+# frozen_string_literal: true
+
+require_relative 'player'
 class Dealer < Player
-	def initialize(cash)
-		super('Dealer', cash)
-	end
+  def initialize(cash)
+    super('Dealer', cash)
+  end
 
-	def turn(bank)
-		self.take_card(bank.cards.pop) if (self.points < 17) && (self.cards.count == 2)
-	end
-
+  def turn(bank)
+    take_card(bank.cards.pop) if (points < 17) && (cards.count == 2)
+  end
 end

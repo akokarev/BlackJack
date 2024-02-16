@@ -1,9 +1,12 @@
-require_relative 'player.rb'
-require_relative 'card.rb'
+# frozen_string_literal: true
+
+require_relative 'player'
+require_relative 'card'
 class Deck
   attr_accessor :cash, :cards
+
   def initialize
-  	@cards = []
+    @cards = []
     @cash = 0
   end
 
@@ -16,12 +19,13 @@ class Deck
     end
     cards.shuffle!
 
-    players.each do |player| 
+    players.each do |player|
       player.cards.clear
       player.cash -= bet
-      raise "Не хватает денег у #{player}" if player.cash < 0
+      raise "Не хватает денег у #{player}" if player.cash.negative?
+
       self.cash += bet
-      2.times { player.take_card(self.cards.pop) }
+      2.times { player.take_card(cards.pop) }
     end
   end
 
@@ -32,5 +36,4 @@ class Deck
     end
     self.cash = 0
   end
-
 end
