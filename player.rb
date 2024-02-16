@@ -12,13 +12,6 @@ class Player
     cards << card
   end
 
-  def take_money(from, count = nil)
-    count = from.cash if count.nil?
-    raise "Не хватает денег у #{from.name}" if from.cash < count
-    from.cash = from.cash - count
-    @cash += count
-  end
-
   def points
     values = cards.map { |card| card.value.is_a?(String) ? (card.value == 'T' ? 1 : 10) : card.value}
     if (t_pos = values.index(1)) && (values.sum <= 11)
@@ -39,14 +32,8 @@ class Player
     name.to_s
   end
 
-  def lets_play(bank)
-    cards.clear
-    bank.take_money(self, 10)
-    2.times { take_card(bank.cards.pop) }
-  end
-
-  def turn(bank)
-    self.take_card(bank.cards.pop)
+  def turn(deck)
+    self.take_card(deck.cards.pop)
   end
 
 end

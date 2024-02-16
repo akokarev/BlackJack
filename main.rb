@@ -1,19 +1,16 @@
 require_relative 'player.rb'
 require_relative 'dealer.rb'
 require_relative 'card.rb'
-require_relative 'bank.rb'
+require_relative 'deck.rb'
 
-bank = Bank.new
+deck = Deck.new
 dealer = Dealer.new(100)
 print 'Player name: '
 player1 = Player.new(gets.chomp, 100)
 
-
 loop do
 
-  bank.lets_play
-  dealer.lets_play(bank)
-  player1.lets_play(bank)
+  deck.lets_play(10, dealer, player1)
   puts
   puts "Ставки сделаны, игра начинается!"
 
@@ -29,13 +26,13 @@ loop do
     print '> '
     case choice = gets.chomp.to_i
     when 1
-      dealer.turn(bank)
+      dealer.turn(deck)
       break if dealer.points > 21
     when 2
       if player1.cards.count == 2
-        player1.turn(bank)
+        player1.turn(deck)
         break if player1.points > 21
-        dealer.turn(bank)
+        dealer.turn(deck)
         break if dealer.points > 21
       else
         puts 'Нельзя добавить карту'
@@ -55,25 +52,17 @@ loop do
   puts "#{dealer} #{dealer.show_cards(true)} =#{dealer.points}"
   puts "#{player1} #{player1.show_cards(true)} =#{player1.points}"
   if (dealer.points > 21) && (player1.points > 21)
-    puts "Перебрали все/Ничья"
-    dealer.take_money(bank, bank.cash / 2)
-    player1.take_money(bank)
+    deck.win("Перебрали все/Ничья", dealer, player1)
   elsif dealer.points > 21
-    puts "#{dealer} перебрал"
-    player1.take_money(bank)
+    deck.win("#{dealer} перебрал, победа #{player1}", player1)
   elsif player1.points > 21
-    puts "#{player1} перебрал, победа #{dealer.name}"
-    dealer.take_money(bank)
+    deck.win("#{player1} перебрал, победа #{dealer}", dealer)
   elsif dealer.points == player1.points
-    puts "Ничья по очкам"
-    dealer.take_money(bank, bank.cash / 2)
-    player1.take_money(bank)
+    deck.win("Ничья по очкам", dealer, player1)
   elsif dealer.points > player1.points
-    puts "#{dealer} выиграл по очкам"
-    dealer.take_money(bank)
+    deck.win("#{dealer} выиграл по очкам", dealer)
   else
-    puts "#{player1} выиграл по очкам"
-    player1.take_money(bank)
+    deck.win("#{player1} выиграл по очкам", player1)
   end
 
   break if (player1.cash == 0) || (dealer.cash == 0)
